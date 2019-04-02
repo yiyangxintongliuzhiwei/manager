@@ -9,6 +9,7 @@
 <script>
 import { Header, Field } from 'mint-ui'
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 Vue.component(Header.name, Header)
 Vue.component(Field.name, Field)
 export default {
@@ -18,14 +19,23 @@ export default {
       password: ''
     }
   },
+  computed: {
+    ...mapGetters(['logininfo'])
+  },
   methods: {
     sure () {
       this.$axios.post('/api/manager/checklogin.php', this.$qs.stringify({
         name: this.username,
         pass: this.password
       })).then(res => {
-        // console.log(res)
-        alert(1)
+        let userinfo = {
+          name: this.username,
+          pass: this.password
+        }
+        if (res.data.code === 100) {
+          this.$store.dispatch('setuser', userinfo)
+          console.log(this.logininfo)
+        }
       })
     }
   }
