@@ -16,13 +16,6 @@ const store = new Vuex.Store({
   mutations,
   // 对logininfo进行过滤
   getters: {
-    logininfo: (state) => {
-      if (Object.keys(state.logininfo) !== '{}') {
-        return state.logininfo
-      } else {
-        alert('当前没有用户')
-      }
-    }
   }
 })
 export default store

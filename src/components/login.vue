@@ -3,13 +3,13 @@
     <mt-header title="登陆"></mt-header>
     <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
     <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
-    <div class="sure" @click="sure()">确定</div>
+    <div class="sure" @click="sure()" >确定</div>
   </div>
 </template>
 <script>
 import { Header, Field } from 'mint-ui'
 import Vue from 'vue'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 Vue.component(Header.name, Header)
 Vue.component(Field.name, Field)
 export default {
@@ -19,23 +19,24 @@ export default {
       password: ''
     }
   },
+  mounted() {
+    // this.$store.dispatch('setuser')
+  },
   computed: {
-    ...mapGetters(['logininfo'])
+    ...mapState(['logininfo'])
   },
   methods: {
     sure () {
-      this.$axios.post('/api/manager/checklogin.php', this.$qs.stringify({
-        name: this.username,
-        pass: this.password
-      })).then(res => {
-        let userinfo = {
-          name: this.username,
-          pass: this.password
-        }
-        if (res.data.code === 100) {
-          this.$store.dispatch('setuser', userinfo)
-          console.log(this.logininfo)
-        }
+      this.$axios.post(process.env.API_ROOT + '/index/Login/checkLogin', this.$qs.stringify({
+        username: this.username,
+        password: this.password
+      })).then((res) => {
+        console.log(res)
+        this.$store.dispatch('setuser', {
+          username: this.username,
+          password: this.password
+        })
+        console.log(this.logininfo)
       })
     }
   }

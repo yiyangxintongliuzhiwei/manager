@@ -1,6 +1,7 @@
 const actions = {
-  setuser ({commit}, status) {
-    commit('LOGININFO', status)
+  setuser ({commit}, data) {
+    // console.log('data')
+    commit('LOGININFO', data)
   }
 }
 export default actions

@@ -1,6 +1,7 @@
 const mutations = {
-  LOGININFO (state, value) {
-    state.logininfo = value
+  ['LOGININFO'] (state, data) {
+    console.log(data)
+    state.logininfo = data
   }
 }
 export default mutations

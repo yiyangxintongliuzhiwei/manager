@@ -1,4 +1,4 @@
-'use strict'
+// 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
@@ -6,37 +6,51 @@ const path = require('path')
 
 module.exports = {
   dev: {
+
     // Paths
     env: require('./dev.env'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost',//设置你调用的接口域名和端口号 别忘了加http
+        // target: 'http://15.192.23.41',//设置你调用的接口域名和端口号 别忘了加http
+        // target: 'http://15.193.240.73:8081',
+        // target: 'http://192.168.33.100',
+        target: 'http://192.168.33.104:8087',
         changeOrigin: true,
         pathRewrite:{
-          '^/api':''//这里理解成用‘/api'代替target里面的地址，后面组件中我们掉接口时直接用api代替 
-               //比如我要调用'http://40.00.100.133:3002/user/login'，直接写‘/api/user/login'即可
+          '^/api':''
+        }
+      },
+      // '/apis': {
+      //   target: 'http://192.168.33.104:8089',
+      //   changeOrigin: true,
+      //   pathRewrite:{
+      //     '^/apis':''
+      //   }
+      // },
+      '/yq': {
+        // target: 'http://15.192.23.41',//设置你调用的接口域名和端口号 别忘了加http
+        // target: 'http://15.193.240.73:8081',
+        // target: 'http://192.168.33.100',
+        target: 'https://yuqing.bigcloudsys.cn',
+        changeOrigin: true,
+        pathRewrite:{
+          '^/yq':''
         }
       }
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '0.0.0.0', // can be overwritten by process.env.HOST
+    // host: 'localhost',
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    // Use Eslint Loader?
-    // If true, your code will be linted during bundling and
-    // linting errors and warnings will be shown in the console.
-    useEslint: true,
-    // If true, eslint errors and warnings will also be shown in the error overlay
-    // in the browser.
-    showEslintErrorsInOverlay: false,
-
+    
     /**
      * Source Maps
      */
