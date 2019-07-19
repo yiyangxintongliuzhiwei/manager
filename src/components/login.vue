@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import { Header, Field } from 'mint-ui'
+import { Header, Field, Toast } from 'mint-ui'
 import Vue from 'vue'
 import { mapState } from 'vuex'
 Vue.component(Header.name, Header)
@@ -31,12 +31,18 @@ export default {
         username: this.username,
         password: this.password
       })).then((res) => {
-        console.log(res)
-        this.$store.dispatch('setuser', {
-          username: this.username,
-          password: this.password
-        })
-        console.log(this.logininfo)
+        if (res.data.data.username) {
+          this.$store.dispatch('setuser', {
+            username: this.username,
+            password: this.password
+          })
+        } else {
+          Toast({
+            message: '用户不存在或密码错误',
+            position: 'center',
+            duration: 2000
+          });
+        }
       })
     }
   }

@@ -11,7 +11,7 @@
         <img src="../common/img/james3.jpg" alt="" width="100%" height="100%" @touchmove.prevent>
       </mt-swipe-item>
     </mt-swipe>
-    <mt-button type="primary" size="normal" class="login" @click.native="handleClick">登陆</mt-button>
+    <mt-button type="primary" size="normal" class="login" @click="handleClick">登陆</mt-button>
     <mt-button type="primary" size="normal" class="reg">注册</mt-button>
   </div>
 </template>
